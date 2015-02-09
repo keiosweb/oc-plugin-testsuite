@@ -21,8 +21,8 @@ class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestCase
         /*
          * Use the array driver during the unit testing
          */
-        Config::set('testing.database.default', 'sqlite');
-        Config::set('testing.database.connections.sqlite', [
+        Config::set('database.default', 'sqlite');
+        Config::set('database.connections.sqlite', [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => ''
