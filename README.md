@@ -1,8 +1,9 @@
 # Keios/oc-plugin-testsuite
 
-[![Latest Version](https://img.shields.io/github/release/keiosweb/moneyright.svg?style=flat-square)](https://github.com/keiosweb/moneyright/releases)
+[![Latest 
+Version](https://img.shields.io/github/release/keiosweb/oc-plugin-testsuite.svg?style=flat-square)](https://github.com/keiosweb/oc-plugin-testsuite/releases)
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
-[![Total Downloads](https://img.shields.io/packagist/dt/keiosweb/moneyright.svg?style=flat-square)](https://packagist.org/packages/keiosweb/moneyright)
+[![Total Downloads](https://img.shields.io/packagist/dt/keiosweb/oc-plugin-testsuite.svg?style=flat-square)](https://packagist.org/packages/keiosweb/moneyright)
 
 Testing middleware package: provides extended PHPUnit's TestCase class - OctoberPluginTestCase, 
 which allows for unit testing in OctoberCMS / Laravel context and loads all related composer autoloaders.
