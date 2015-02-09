@@ -33,4 +33,11 @@ class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestCase
         return $result;
     }
 
+    public function setUp(){
+        parent::setUp();
+
+        Artisan::call('october:up');
+        Mail::pretend(true);
+    }
+
 }
