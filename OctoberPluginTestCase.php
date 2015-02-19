@@ -16,7 +16,7 @@ class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestCase
 
         // __DIR__ = base_path() . '/plugins/vendor/plugin/vendor/keios/oc-plugin-testsuite
 
-        $result = require __DIR__ . '/../../../../../../bootstrap/start.php';
+        $result = require __DIR__ . '/../../../../../../bootstrap/app.php';
 
         /*
          * Use the array driver during the unit testing
