@@ -3,6 +3,8 @@
 class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestCase
 {
 
+    protected static $alreadyMigrated = false;
+
     /**
      * Creates the application.
      *
@@ -12,7 +14,7 @@ class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestCase
     {
         // __DIR__ = base_path() . '/plugins/vendor/plugin/vendor/keios/oc-plugin-testsuite
 
-        $app = require __DIR__ . '/../../../../../../bootstrap/app.php';
+        $app = require __DIR__.'/../../../../../../bootstrap/app.php';
 
         $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
 
@@ -22,20 +24,34 @@ class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestCase
          * Use the sqlite memory driver during the unit testing
          */
         $app['config']->set('database.default', 'sqlite');
-        $app['config']->set('database.connections.sqlite', [
-            'driver' => 'sqlite',
-            'database' => ':memory:',
-            'prefix' => ''
-        ]);
+        $app['config']->set(
+            'database.connections.sqlite',
+            [
+                'driver' => 'sqlite',
+                'database' => ':memory:',
+                'prefix' => ''
+            ]
+        );
 
         return $app;
     }
 
-    public function setUp(){
+    public function setUp()
+    {
         parent::setUp();
 
-        Artisan::call('october:up');
+        if (!static::$alreadyMigrated) {
+            Artisan::call('october:up');
+            static::$alreadyMigrated = true;
+        }
         Mail::pretend(true);
+    }
+
+
+    public function tearDown()
+    {
+        parent::tearDown();
+        unset ($this->app);
     }
 
 }
