@@ -8,6 +8,8 @@ Version](https://img.shields.io/github/release/keiosweb/oc-plugin-testsuite.svg?
 Testing middleware package: provides extended PHPUnit's TestCase class - OctoberPluginTestCase, 
 which allows for unit testing in OctoberCMS / Laravel context and loads all related composer autoloaders.
 
+Prepared for OctoberCMS Release Candidate, won't work with beta releases.
+
 ## Requirements
 OctoberCMS
 PHPUnit
@@ -35,8 +37,8 @@ Plugin's phpunit.xml should look somewhat like this:
          convertNoticesToExceptions="true"
          convertWarningsToExceptions="true"
          processIsolation="false"
-         stopOnFailure="false">
-         syntaxCheck="false"
+         stopOnFailure="false"
+         syntaxCheck="false">
     <testsuites>
         <testsuite name="October Plugin Unit Test Suite">
             <directory>tests/unit</directory>
@@ -52,6 +54,11 @@ Plugin's phpunit.xml should look somewhat like this:
         <log type="coverage-text" target="build/coverage.txt"/>
         <log type="coverage-clover" target="build/logs/clover.xml"/>
     </logging>
+    <php>
+        <env name="APP_ENV" value="testing"/>
+        <env name="CACHE_DRIVER" value="array"/>
+        <env name="SESSION_DRIVER" value="array"/>
+    </php>
 </phpunit>
 
 ```

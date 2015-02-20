@@ -10,27 +10,25 @@ class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
-        $unitTesting = true;
-
-        $testEnvironment = 'testing';
-
         // __DIR__ = base_path() . '/plugins/vendor/plugin/vendor/keios/oc-plugin-testsuite
 
-        $result = require __DIR__ . '/../../../../../../bootstrap/app.php';
+        $app = require __DIR__ . '/../../../../../../bootstrap/app.php';
+
+        $app->make('Illuminate\Contracts\Console\Kernel')->bootstrap();
+
+        $app->setLocale('en');
 
         /*
-         * Use the array driver during the unit testing
+         * Use the sqlite memory driver during the unit testing
          */
-        Config::set('database.default', 'sqlite');
-        Config::set('database.connections.sqlite', [
+        $app['config']->set('database.default', 'sqlite');
+        $app['config']->set('database.connections.sqlite', [
             'driver' => 'sqlite',
             'database' => ':memory:',
             'prefix' => ''
         ]);
 
-        App::setLocale('en');
-
-        return $result;
+        return $app;
     }
 
     public function setUp(){

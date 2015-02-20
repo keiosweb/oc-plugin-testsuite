@@ -1,13 +1,14 @@
 {
-    "name": "keios/oc-plugin-testsuite",
-    "description": "Testing middleware package for OctoberCMS Plugins",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Lukasz",
-            "email": "lukasz@c-call.eu"
-        }
-    ],
-    "minimum-stability": "dev",
-    "require": {}
+  "name": "keios/oc-plugin-testsuite",
+  "description": "Testing middleware package for OctoberCMS Plugins",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Łukasz Biały",
+      "email": "lukasz@c-call.eu",
+      "role": "developer"
+    }
+  ],
+  "minimum-stability": "dev",
+  "require": {}
 }
