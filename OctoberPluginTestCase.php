@@ -3,8 +3,6 @@
 class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestCase
 {
 
-    protected static $alreadyMigrated = false;
-
     /**
      * Creates the application.
      *
@@ -12,6 +10,10 @@ class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestCase
      */
     public function createApplication()
     {
+        /*
+         * Build application instance, bootstap it
+         */
+
         // __DIR__ = base_path() . '/plugins/vendor/plugin/vendor/keios/oc-plugin-testsuite
 
         $app = require __DIR__.'/../../../../../../bootstrap/app.php';
@@ -38,12 +40,25 @@ class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestCase
 
     public function setUp()
     {
+        /*
+         * Create application instance
+         */
         parent::setUp();
 
-        if (!static::$alreadyMigrated) {
-            Artisan::call('october:up');
-            static::$alreadyMigrated = true;
-        }
+        /*
+         * Reboot October Singletons' dependencies
+         */
+        \System\Classes\PluginManager::instance()->bindContainerObjects();
+        \System\Classes\UpdateManager::instance()->bindContainerObjects();
+
+        /*
+         * Migrate October to RAM sqlite database
+         */
+        Artisan::call('october:up');
+
+        /*
+         * Prevent mailer from actually sending emails
+         */
         Mail::pretend(true);
     }
 
