@@ -24,6 +24,8 @@ $ composer require keiosweb/oc-plugin-testsuite --dev
 
 ## Usage
 
+#### phpunit.xml
+
 Plugin's phpunit.xml should look somewhat like this:
 
 ``` xml
@@ -61,6 +63,59 @@ Plugin's phpunit.xml should look somewhat like this:
     </php>
 </phpunit>
 
+```
+
+#### Test Cases
+
+Package provides class OctoberPluginTestCase, which is prepared to run tests in Laravel 5 / OctoberCMS environment and comes with handy features like automatic migrations.
+
+Your test cases should follow these rules:
+
+**basic unit test**
+``` php
+<?php namespace Vendor\PluginName\Tests
+
+class SomeClassTest extends \OctoberPluginTestCase {
+
+    protected $someMockObjectUsedInAllTests;
+
+    public function pluginTestSetUp () // PHPUnit's set up method is unavailable, use this instead
+    {
+        $this->someMockObjectUsedInAllTests = \Mockery::mock('Some\Other\Class');
+    }
+
+    public function testSomething() { 
+        $instance = new SomeClass($this->someMockObjectUsedInAllTests);
+        
+        $this->assertEquals('result', $instance->getResult());
+    }
+
+}
+``` 
+
+**functional test requiring October environment, but not refreshing plugins**
+``` php
+<?php namespace Vendor\PluginName\Tests
+
+class AFunctionalTest extends \OctoberPluginTestCase {
+
+    protected $requiresOctoberMigration = true; // test suite will migrate october
+
+}
+```
+
+**functional test requiring October environment AND refreshing plugin 'Vendor.PluginName'**
+``` php
+<?php namespace Vendor\PluginName\Tests
+
+class AFunctionalTestRequiringMigrations extends \OctoberPluginTestCase {
+
+    /*
+     * Here you can add multiple plugin codes, ie.: your plugin and it's dependencies
+     */
+    protected $refreshPlugins = ['Vendor.PluginName', 'OtherVendor.OtherPlugin'];
+
+}
 ```
 
 ## Credits
