@@ -12,14 +12,13 @@ Prepared for OctoberCMS Release Candidate, won't work with beta releases.
 
 ## Requirements
 OctoberCMS
-PHPUnit
 
 ## Install
 
 Via Composer
 
 ``` bash
-$ composer require keiosweb/oc-plugin-testsuite --dev
+$ composer require keios/oc-plugin-testsuite dev-master
 ```
 
 ## Usage
