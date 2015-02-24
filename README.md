@@ -18,7 +18,7 @@ OctoberCMS
 Via Composer
 
 ``` bash
-$ composer require keios/oc-plugin-testsuite dev-master
+$ composer require keios/oc-plugin-testsuite dev-master --dev
 ```
 
 ## Usage
