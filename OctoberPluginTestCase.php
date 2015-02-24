@@ -14,16 +14,7 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
      * @var bool
      */
     protected $requiresOctoberMigration = false;
-
-    /**
-     * @var
-     */
-    protected $fullPluginPath;
-
-    /**
-     * @var
-     */
-    protected $pluginNamespace;
+    
 
     /**
      * Creates the application.
@@ -144,16 +135,16 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
     /**
      * Clears event listeners of available plugin models and boots them
      */
-    protected final function rebootModels()
+    protected final function rebootModels($path, $namespace)
     {
-        $modelsPath = $this->fullPluginPath.'/models';
+        $modelsPath = $path.'/models';
 
         if (File::isDirectory($modelsPath)) {
             $models = File::files($modelsPath);
 
             $modelClasses = array_map(
-                function ($modelClass) {
-                    return $this->pluginNamespace.'\\Models\\'.basename($modelClass, '.php');
+                function ($modelClass) use ($namespace) {
+                    return $namespace.'\\Models\\'.basename($modelClass, '.php');
                 },
                 $models
             );
