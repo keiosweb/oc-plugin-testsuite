@@ -14,7 +14,7 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
      * @var bool
      */
     protected $requiresOctoberMigration = false;
-    
+
 
     /**
      * Creates the application.
@@ -106,6 +106,7 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
      */
     public function tearDown()
     {
+        $this->rebootAllModels();
         parent::tearDown();
         unset ($this->app);
     }
@@ -122,8 +123,6 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
 
         $this->migrateOctober();
 
-        $this->rebootModels($path, $namespace);
-
         \System\Classes\PluginManager::instance()->loadPlugin(
             $code,
             $path
@@ -135,27 +134,15 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
     /**
      * Clears event listeners of available plugin models and boots them
      */
-    protected final function rebootModels($path, $namespace)
+    protected final function rebootAllModels()
     {
-        $modelsPath = $path.'/models';
-
-        if (File::isDirectory($modelsPath)) {
-            $models = File::files($modelsPath);
-
-            $modelClasses = array_map(
-                function ($modelClass) use ($namespace) {
-                    return $namespace.'\\Models\\'.basename($modelClass, '.php');
-                },
-                $models
-            );
-
-            foreach ($modelClasses as $modelClass) {
-                if (class_exists($modelClass) && is_subclass_of($modelClass, 'October\Rain\Database\Model')) {
-                    $modelClass::flushEventListeners();
-                    $modelClass::boot();
-                }
+        foreach (get_declared_classes() as $class) {
+            if (is_subclass_of($class, 'October\Rain\Database\Model')) {
+                $class::flushEventListeners();
             }
         }
+
+        \October\Rain\Database\Model::flushEventListeners();
     }
 
     /**
