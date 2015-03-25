@@ -137,7 +137,12 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
     protected final function rebootAllModels()
     {
         foreach (get_declared_classes() as $class) {
-            if (is_subclass_of($class, 'October\Rain\Database\Model')) {
+            /*
+             * Reboot event listeners on all October\Rain\Database\Model subclasses
+             * with exception of Pivot model that is a special, internal model for pivot tables
+             * and should not be initialised outside of relation context.
+             */
+            if (is_subclass_of($class, 'October\Rain\Database\Model') && $class !== 'October\Rain\Database\Pivot') {
                 $class::flushEventListeners();
             }
         }
