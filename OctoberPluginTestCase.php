@@ -194,7 +194,7 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
 
         list($vendor, $plugin) = $parts;
 
-        return plugins_path().'/'.$vendor.'/'.$plugin;
+        return base_path().\Config::get('cms.pluginsPath').'/'.$vendor.'/'.$plugin;
     }
 
     /**
