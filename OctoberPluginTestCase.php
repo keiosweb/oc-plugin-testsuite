@@ -124,7 +124,7 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
         $this->migrateOctober();
 
         \System\Classes\PluginManager::instance()->loadPlugin(
-            $code,
+            $namespace,
             $path
         );
 
