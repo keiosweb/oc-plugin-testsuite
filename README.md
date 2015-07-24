@@ -56,7 +56,7 @@ Plugin's phpunit.xml should look somewhat like this:
         <log type="coverage-clover" target="build/logs/clover.xml"/>
     </logging>
     <php>
-        <env name="APP_ENV" value="testing"/>
+        <env name="APP_ENV" value="plugin_testing"/>
         <env name="CACHE_DRIVER" value="array"/>
         <env name="SESSION_DRIVER" value="array"/>
     </php>
