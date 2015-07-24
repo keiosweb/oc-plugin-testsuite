@@ -120,6 +120,8 @@ class AFunctionalTestRequiringMigrations extends \OctoberPluginTestCase {
 ## Credits
 
 - [Keios Solutions](https://github.com/keiosweb)
+- [Scott Bedard](https://github.com/scottbedard)
+- [Justin Lau](https://github.com/justin-lau)
 
 ## License
 
