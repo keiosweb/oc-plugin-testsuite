@@ -42,9 +42,9 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
         $app['config']->set(
             'database.connections.sqlite',
             [
-                'driver' => 'sqlite',
+                'driver'   => 'sqlite',
                 'database' => ':memory:',
-                'prefix' => ''
+                'prefix'   => ''
             ]
         );
 
@@ -142,7 +142,10 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
              * with exception of Pivot model that is a special, internal model for pivot tables
              * and should not be initialised outside of relation context.
              */
-            if (is_subclass_of($class, 'October\Rain\Database\Model') && $class !== 'October\Rain\Database\Pivot') {
+            if (is_subclass_of($class, 'October\Rain\Database\Model')
+                && $class !== 'October\Rain\Database\Pivot'
+                && !is_subclass_of($class, 'October\Rain\Database\Pivot')
+            ) {
                 $class::flushEventListeners();
             }
         }
