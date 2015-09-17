@@ -5,6 +5,8 @@ Version](https://img.shields.io/github/release/keiosweb/oc-plugin-testsuite.svg?
 [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square)](LICENSE.md)
 [![Total Downloads](https://img.shields.io/packagist/dt/keios/oc-plugin-testsuite.svg?style=flat-square)](https://packagist.org/packages/keios/oc-plugin-testsuite)
 
+### THIS PACKAGE IS NOW DEPRECATED AS OCTOBERCMS NOW SHIPS WITH IT'S OWN PLUGIN UNIT TESTING TEST CASE.
+
 Testing middleware package: provides extended PHPUnit's TestCase class - OctoberPluginTestCase, 
 which allows for unit testing in OctoberCMS / Laravel context and loads all related composer autoloaders.
 
