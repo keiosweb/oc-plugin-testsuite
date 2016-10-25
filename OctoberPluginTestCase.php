@@ -69,6 +69,9 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
         \System\Classes\PluginManager::instance()->bindContainerObjects();
         \System\Classes\UpdateManager::instance()->bindContainerObjects();
 
+        // ensure october is up to date
+        $this->migrateOctober();
+
         /*
          * If test maker wants to create functional test, migrate october and given plugins
          */
@@ -82,9 +85,9 @@ abstract class OctoberPluginTestCase extends Illuminate\Foundation\Testing\TestC
         /*
          * If test maker wants october environment for some reason, migrate october
          */
-        if ((count($this->refreshPlugins) === 0) && $this->requiresOctoberMigration) {
-            $this->migrateOctober();
-        }
+     //   if ((count($this->refreshPlugins) === 0) && $this->requiresOctoberMigration) {
+        // $this->migrateOctober();
+      //  }
 
         /*
          * Prevent mailer from actually sending emails
